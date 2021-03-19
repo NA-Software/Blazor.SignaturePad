@@ -168,6 +168,11 @@ namespace Mobsites.Blazor
         [Parameter] public int? TabIndex { get; set; } = null;
 
         /// <summary>
+        /// Parameter to hold a DataUrl if you want to load a signature on load
+        /// </summary>
+        [Parameter] public string? DataUrl { get; set; } = null;
+
+        /// <summary>
         /// Clear all state for this UI component and any of its dependents from browser storage.
         /// </summary>
         public Task ClearState() => this.ClearState<SignaturePad, Options>().AsTask();
@@ -190,6 +195,17 @@ namespace Mobsites.Blazor
         public Task<string> ToDataURL(SupportedSaveAsTypes? saveAsType = null) => IsWASM
             ? ToDataURLWasm(saveAsType ?? SaveAsType)
             : ToDataURLServer(saveAsType ?? SaveAsType);
+
+        /// <summary>
+        /// Load signature from data url according to the supported type.
+        /// </summary>
+        public void FromDataURL(string dataUrl)
+        {
+            if (IsWASM)
+                FromDataURLWasm(dataUrl);
+            else
+                FromDataURLServer(dataUrl);
+        }
 
         /// <summary>
         /// Clear signature pad.
@@ -356,7 +372,14 @@ namespace Mobsites.Blazor
                     this.Canvas
                 },
                 options);
-
+            
+            if (DataUrl != null)
+            {
+                if (IsWASM)
+                {
+                    FromDataURLWasm(DataUrl);
+                }
+            }
             await this.Save<SignaturePad, Options>(options);
         }
 
@@ -467,6 +490,24 @@ namespace Mobsites.Blazor
             return rtnData;
         }
 
+        /// <summary>
+        /// Internal helper to load signature from data url according to the supported type
+        /// when using Blazor Webassembly.
+        /// </summary>
+        internal void FromDataURLWasm(string dataUrl) => this.jsRuntime.InvokeVoidAsync(
+            "Mobsites.Blazor.SignaturePads.fromDataURL",
+            Index,
+            dataUrl)
+            .AsTask();
+
+        /// <summary>
+        /// Internal helper to load signature from data url according to the supported type
+        /// when using Blazor Server. (Thanks to Mike for this contribution!)
+        /// </summary>
+        internal async void FromDataURLServer(string dataUrl)
+        {
+            throw new NotImplementedException();
+        }
         /// <summary>
         /// Called by GC.
         /// </summary>
