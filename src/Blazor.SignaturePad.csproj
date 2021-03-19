@@ -8,20 +8,17 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>Mobsites</RootNamespace>
     <SignAssembly>true</SignAssembly>
-    <Company>Mobsites</Company>
-    <Authors>Allan Mobley</Authors>
-    <Copyright>© 2020 Mobsites</Copyright>
+    <Company>Nicholas Associates Software</Company>
+    <Authors>Nicholas Associates Software</Authors>
+    <Copyright>© 2020 Nicholas Associates Software</Copyright>
     <Description>A Blazor UI component for smooth signature drawing on a HTML5 canvas.</Description>
-    <PackageId>Mobsites.Blazor.SignaturePad</PackageId>
+    <PackageId>NASoftware.Blazor.SignaturePad</PackageId>
     <IsPackable>true</IsPackable>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageIcon>mobsites-logo.png</PackageIcon>
-    <PackageReleaseNotes>Updated platform detection to new value check. Fixed missing default pen color bug when color not set as attribute. Added attribute support for popup modal use cases. Updated dependencies.</PackageReleaseNotes>
-    <PackageVersion>1.1.7</PackageVersion>
+    <PackageIcon>nasoftware-logo.png</PackageIcon>
     <PackageTags>blazor;component;signature;pad;canvas;</PackageTags>
-    <PackageProjectUrl>https://www.mobsites.com/blazor/signature-pad</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Mobsites/Blazor.SignaturePad</RepositoryUrl>
+    <RepositoryUrl>https://github.com/NA-Software/Blazor.SignaturePad</RepositoryUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -30,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="assets\mobsites-logo.png">
+    <None Include="assets\nasoftware-logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
