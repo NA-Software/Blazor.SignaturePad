@@ -173,6 +173,11 @@ namespace Mobsites.Blazor
         [Parameter] public string? DataUrl { get; set; } = null;
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Parameter] public bool? Enabled { get; set; } = true;
+
+        /// <summary>
         /// Clear all state for this UI component and any of its dependents from browser storage.
         /// </summary>
         public Task ClearState() => this.ClearState<SignaturePad, Options>().AsTask();
@@ -380,6 +385,16 @@ namespace Mobsites.Blazor
                     FromDataURLWasm(DataUrl);
                 }
             }
+
+            if ((bool)Enabled)
+            {
+                Enable();
+            }
+            else
+            {
+                Disable();
+            }
+
             await this.Save<SignaturePad, Options>(options);
         }
 
