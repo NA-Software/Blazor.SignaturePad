@@ -520,16 +520,12 @@ namespace Mobsites.Blazor
         /// <summary>
         /// Call to diable the signature pad
         /// </summary>
-        public void Disable()
-        {
-            jsRuntime.InvokeVoidAsync("Mobsites.Blazor.SignaturePads.disable", Index);
-        }
+        public async void Disable() => await jsRuntime.InvokeVoidAsync("Mobsites.Blazor.SignaturePads.disable", Index).AsTask();
+
         /// <summary>
         /// Call to enable the signature pad
         /// </summary>
-        public void Enable()
-        {
-            jsRuntime.InvokeVoidAsync("Mobsites.Blazor.SignaturePads.enable", Index);
-        }
+        public async void Enable() => await jsRuntime.InvokeVoidAsync("Mobsites.Blazor.SignaturePads.enable", Index).AsTask();
+
     }
 }
