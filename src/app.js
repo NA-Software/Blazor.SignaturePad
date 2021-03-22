@@ -101,11 +101,9 @@ window.Mobsites.Blazor.SignaturePads = {
         this.store[index].restoreSignatureState(key, useSession);
     },
     disable: function (index) {
-        console.log("Calling function to disable for ya pal");
         this.store[index]._disable();
     },
     enable: function (index) {
-        console.log("Calling function to enable for ya pal");
         this.store[index]._enable();
     }
 }
@@ -257,11 +255,9 @@ class Mobsites_Blazor_SignaturePad extends SignaturePad {
         }
     }
     _disable() {
-        console.log("I should be disabled");
         this.off();
     }
     _enable() {
-        console.log("I should be enabled")
         this.on();
     }
 }

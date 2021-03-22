@@ -385,16 +385,7 @@ namespace Mobsites.Blazor
                     FromDataURLWasm(DataUrl);
                 }
             }
-
-            if ((bool)Enabled)
-            {
-                Enable();
-            }
-            else
-            {
-                Disable();
-            }
-
+            CheckEnabled();
             await this.Save<SignaturePad, Options>(options);
         }
 
@@ -415,7 +406,7 @@ namespace Mobsites.Blazor
                 "Mobsites.Blazor.SignaturePads.update",
                 Index,
                 options);
-
+            CheckEnabled();
             await this.Save<SignaturePad, Options>(options);
         }
 
@@ -542,5 +533,16 @@ namespace Mobsites.Blazor
         /// </summary>
         public async void Enable() => await jsRuntime.InvokeVoidAsync("Mobsites.Blazor.SignaturePads.enable", Index).AsTask();
 
+        public void CheckEnabled()
+        {
+            if ((bool)Enabled)
+            {
+                Enable();
+            }
+            else
+            {
+                Disable();
+            }
+        }
     }
 }
