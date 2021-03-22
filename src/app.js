@@ -15,7 +15,6 @@ window.Mobsites.Blazor.SignaturePads = {
     store: [],
     init: function (dotNetObjRef, elemRefs, options) {
         try {
-            console.log("what is line?");
             const index = this.add(new Mobsites_Blazor_SignaturePad(dotNetObjRef, elemRefs, options));
             dotNetObjRef.invokeMethodAsync('SetIndex', index);
             dotNetObjRef.invokeMethodAsync('RestoreSignatureState');
@@ -63,7 +62,6 @@ window.Mobsites.Blazor.SignaturePads = {
         return this.store[index]._toDataURL(type);
     },
     fromDataURL: function (index, dataUrl) {
-        console.log(index);
         this.store[index]._fromDataURL(dataUrl);
     },
     changePenColor: function (index, color) {
@@ -101,6 +99,12 @@ window.Mobsites.Blazor.SignaturePads = {
     },
     restoreSignatureState: function (index, key, useSession) {
         this.store[index].restoreSignatureState(key, useSession);
+    },
+    disable: function (index) {
+        this.store[index]._disable();
+    },
+    enable: function (index) {
+        this.store[index]._enable();
     }
 }
 
@@ -167,7 +171,6 @@ class Mobsites_Blazor_SignaturePad extends SignaturePad {
         return dataURL;
     }
     _fromDataURL(dataUrl) {
-        console.log(this, dataUrl);
         this.fromDataURL(dataUrl);
     }
     preserveFullSignature(type) {
@@ -250,5 +253,11 @@ class Mobsites_Blazor_SignaturePad extends SignaturePad {
             // Restore signature.
             this.fromData(signature);
         }
+    }
+    _disable() {
+        this.off();
+    }
+    _enable() {
+        this.on();
     }
 }
